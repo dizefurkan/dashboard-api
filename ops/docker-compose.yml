@@ -23,7 +23,11 @@ services:
       - "mongo:mongodbhost"
   mongo:
     container_name: dashboard_mongo
-    image: mongo:4.1.6-xenial
+    image: mongo:latest
     restart: always
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
     volumes:
       - ../database:/data/db
+    command: mongod

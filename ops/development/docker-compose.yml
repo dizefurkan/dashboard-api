@@ -10,7 +10,7 @@ services:
     environment:
       NODE_ENV: "development"
       MONGO_HOST: "mongodbhost"
-      MONGO_PORT: 32790
+      MONGO_PORT: 27017
       MONGO_DB: "dashboard"
       PORT: 4000
     links:

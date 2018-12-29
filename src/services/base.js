@@ -13,7 +13,7 @@ export default class BaseService {
       const settings = this.endpoints[endpointKey];
       const handlers = [];
       if (typeof (settings.handlers) === 'string') {
-        handlers.push(this[setting.s.handlers]);
+        handlers.push(this[settings.handlers]);
       } else {
         settings.handlers.forEach((handlerName) => {
           handlers.push(this[handlerName]);
