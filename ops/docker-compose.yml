@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  dashboard_api:
+    container_name: dashboard_api
+    image: lorem_ipsum/dashboard_api:1.0
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PROJECT_NAME: "dashboard_api"
+        APPLICATIONS_PATH: "/srv"
+        PORT: 4000
+    volumes:
+      - "../build:/srv/dashboard_api/build"
+      - "../node_modules:/srv/dashboard_api/node_modules"
+      - "../package.json:/srv/dashboard_api/package.json"
+      - "../data:/srv/dashboard_api/data"
+      - "../.sequelizerc:/srv/dashboard_api/.sequelizerc"
+      - "../.babelrc:/srv/dashboard_api/.babelrc"
+      - "../src:/srv/dashboard_api/src"
+    links:
+      - "mongo:mongodbhost"
+  mongo:
+    container_name: dashboard_mongo
+    image: mongo:4.1.6-xenial
+    restart: always
+    volumes:
+      - ../database:/data/db

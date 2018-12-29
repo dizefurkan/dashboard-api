@@ -1,0 +1,4 @@
+node_modules
+database
+build
+package-lock.json

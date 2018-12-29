@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  dashboard_api:
+    build:
+      args:
+        PORT: 4000
+    ports:
+      - "4000:4000"
+    environment:
+      NODE_ENV: "development"
+      MONGO_HOST: "mongodbhost"
+      MONGO_PORT: 32790
+      MONGO_DB: "dashboard"
+      PORT: 4000
+    links:
+      - "mongo:mongodbhost"
+    volumes:
+      - "./development/pm2.json:/srv/dashboard_api/pm2.json"
+  mongo:
+    ports:
+      - 32790:27017
