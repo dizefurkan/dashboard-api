@@ -1,0 +1,17 @@
+{
+  "apps" : [
+    {
+      "name": "dashboard_api",
+      "script": "build/app.js",
+      "watch": ["build", "node_modules"],
+      "exec_mode" : "cluster",
+      "instances": 1,
+      "env": {
+        "NODE_ENV": "development",
+        "MONGO_HOST": "localhost",
+        "MONGO_PORT": "27017",
+        "MONGO_DB": "dashboard"
+      }
+    }
+  ]
+}

@@ -5,6 +5,7 @@
   "main": "build/app.js",
   "scripts": {
     "start": "webpack --watch",
+    "start-server": "pm2-runtime pm2.json",
     "build": "webpack",
     "docker-dev-start": "docker-compose -f ops/docker-compose.yml -f ops/development/docker-compose.yml up",
     "docker-build": "docker-compose -f ops/docker-compose.yml build",
@@ -59,6 +60,7 @@
     "eslint-loader": "^2.1.1",
     "eslint-plugin-import": "^2.8.0",
     "nodemon": "^1.14.12",
+    "pm2": "^3.2.4",
     "prettyjson": "^1.2.1",
     "webpack": "^3.10.0"
   }
