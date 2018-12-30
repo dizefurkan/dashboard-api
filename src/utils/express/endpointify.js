@@ -30,7 +30,7 @@ const makeHandler = handler => (async (req, res, next) => {
     });
 
     if (response) {
-      res.send(response.body).status(response.status);
+      res.status(response.status).send(response.body);
     }
   } catch (error) {
     next(error);
