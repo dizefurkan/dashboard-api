@@ -18,9 +18,6 @@ const UserSchema = new Schema(
       required: false,
       default: 'normaluser'
     }
-  },
-  {
-    collection: 'User'
   }
 );
 
