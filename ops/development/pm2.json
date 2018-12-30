@@ -4,7 +4,7 @@
       "name": "dashboard_api",
       "cwd": "/srv/dashboard_api",
       "script": "build/app.js",
-      "watch": ["build", "node_modules"],
+      "watch": true,
       "exec_mode" : "cluster",
       "instances": 1
     }

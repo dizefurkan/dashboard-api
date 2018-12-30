@@ -8,4 +8,5 @@ const endpoints = _flattenDeep(getFolderNames(__dirname, ['index.js']).map((file
   return service.getEndpoints();
 }));
 
+
 export default endpoints;
