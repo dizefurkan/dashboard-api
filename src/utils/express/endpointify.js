@@ -3,13 +3,13 @@ import Joi from 'joi';
 
 const getValidationMiddleware = endpoint => ((req, res, next) => {
   const errors = {};
-  if (endpoint.validation.body) {
+  if (endpoint.validation && endpoint.validation.body) {
     const { error, value } = Joi.validate(req.body, endpoint.validation.body);
     if (error) errors.body = error;
     else req.body = value;
   }
 
-  if (endpoint.validation.query) {
+  if (endpoint.validation && endpoint.validation.query) {
     const { error, value } = Joi.validate(req.query, endpoint.validation.query);
     if (error) errors.query = error;
     else req.query = value;
