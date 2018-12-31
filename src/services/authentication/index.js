@@ -1,7 +1,9 @@
 import BaseService from 'services/base';
-import User from 'models/user';
 import validators from './validators';
+import User from 'models/user';
+import jwt from 'jsonwebtoken';
 
+const secretKey = 'teadizefurkan';
 
 const endpoints = [
   {
@@ -22,11 +24,14 @@ export class Authentication extends BaseService {
   login = async (req) => {
     const { username, password } = req.body;
 
-    const result = await User.findOne({ username });
+    const result = await User.findOne({ username, password });
     if (result) {
+      const token = jwt.sign({ id: result._id, username, password}, secretKey, {});
       return {
         status: 200,
-        body: result.toJSON()
+        body: {
+          token
+        }
       };
     }
 
@@ -37,22 +42,24 @@ export class Authentication extends BaseService {
   }
 
   me = async (req) => {
-    if (req.get('X-AccessToken') === '221f3ffeef06c9e14012a2b79278f9b474d63718399c9a381a10a44b5896a1cc') {
+    const token = req.headers['x-accesstoken'];
+    if (!token) {
       return {
-        status: 200,
+        status: 401,
         body: {
-          username: 'talha',
-          email: 'talhaeminaydemir@gmail.com',
-          photo: 'https://dummyimage.com/300x300/000/fff',
-          token: '221f3ffeef06c9e14012a2b79278f9b474d63718399c9a381a10a44b5896a1cc'
+          error: 'Token not exist'
         }
       };
     }
-
-    return {
-      status: 401,
-      body: {}
-    };
+    jwt.verify(token, secretKey, (err, decoded) => {
+      console.log('Error:', err, 'Decoded:', decoded)
+      return {
+        status: 200,
+        body: {
+          message: decoded
+        }
+      }
+    })
   }
 }
 
