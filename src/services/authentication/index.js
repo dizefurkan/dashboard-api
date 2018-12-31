@@ -51,15 +51,13 @@ export class Authentication extends BaseService {
         }
       };
     }
-    jwt.verify(token, secretKey, (err, decoded) => {
-      console.log('Error:', err, 'Decoded:', decoded)
-      return {
-        status: 200,
-        body: {
-          message: decoded
-        }
+    const result = await jwt.verify(token, secretKey);
+    return {
+      status: 200,
+      body: {
+        message: result
       }
-    })
+    }
   }
 }
 
