@@ -1,7 +1,8 @@
-import BaseService from 'services/base';
-import validators from './validators';
-import User from 'models/user';
 import jwt from 'jsonwebtoken';
+import BaseService from 'services/base';
+import User from 'models/user';
+import validators from './validators';
+
 
 const secretKey = 'teadizefurkan';
 
@@ -26,7 +27,7 @@ export class Authentication extends BaseService {
 
     const result = await User.findOne({ username, password });
     if (result) {
-      const token = jwt.sign({ id: result._id, username, password}, secretKey, {});
+      const token = jwt.sign({ id: result._id, username, password }, secretKey, {});
       return {
         status: 200,
         body: {
@@ -54,10 +55,8 @@ export class Authentication extends BaseService {
     const result = await jwt.verify(token, secretKey);
     return {
       status: 200,
-      body: {
-        message: result
-      }
-    }
+      body: result
+    };
   }
 }
 
