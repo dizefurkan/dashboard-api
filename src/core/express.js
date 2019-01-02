@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 import methodOverride from 'method-override';
 
+import authentication from 'middlewares/authentication';
 import errorHandler from 'middlewares/errorHandler';
 import config from 'config/express';
 
@@ -17,6 +18,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(morgan(config.morgan));
 app.use(methodOverride());
+app.use(authentication);
 app.use('/api/v1/', router);
 app.use(errorHandler);
 
