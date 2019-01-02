@@ -13,6 +13,6 @@ export default async (req, res, next) => {
     await jwt.verify(token, secretKey);
     next();
   } catch (err) {
-    res.status(401).send(err)
+    res.status(401).send(err);
   }
 };
